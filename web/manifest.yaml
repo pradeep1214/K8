@@ -1,0 +1,35 @@
+---
+apiversion: v1
+kind: Pod
+metadata:
+ name: web
+ type: frontend
+resources:
+ request:
+  cpu: "100m"
+  memory: "120Mi"
+ Limits:
+  cpu: "100m"
+  memory: "120Mi"
+spec:
+  container:
+  - name: web
+    image: lella1994/web:v1
+    ports:
+    - containerPort: 8080
+
+---
+apiversion: v1 
+kind: Service
+metadata:
+ name: web-service
+spec:
+ type: LoadBalancer
+ selectors:
+  name: web
+  type: frontend
+ ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  

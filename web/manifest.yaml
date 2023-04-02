@@ -13,7 +13,7 @@ resources:
   memory: "120Mi"
 spec:
   container:
-  - name: web
+  - name: web_server
     image: lella1994/web:v1
     ports:
     - containerPort: 8080

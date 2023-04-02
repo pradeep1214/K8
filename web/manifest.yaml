@@ -2,8 +2,10 @@
 apiVersion: v1
 kind: Pod
 metadata:
- name: webserver
- type: frontend
+  name: webserver
+  lables:
+    name: webserver
+    type: frontend
 resources:
  request:
   cpu: "100m"
@@ -17,7 +19,7 @@ spec:
     image: lella1994/web:v1
     imagepullolicy: Always
     ports:
-    - containerPort: 80
+    -  containerPort: 80
 
 ---
 apiVersion: v1 
@@ -30,7 +32,8 @@ spec:
   name: webserver
   type: frontend
  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
-  
+   - protocol: TCP
+     port: 80
+     targetPort: 80
+
+

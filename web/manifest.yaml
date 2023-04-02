@@ -1,39 +1,66 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Codespaces
+Marketplace
+Explore
+ 
+@pradeep1214 
+techworldwithsiva
+/
+k8-roboshop
+Public
+Fork your own copy of techworldwithsiva/k8-roboshop
+Code
+Issues
+Pull requests
+Actions
+Projects
+Security
+Insights
+k8-roboshop/web/manifest.yaml
+
+siva some msg
+Latest commit 5dd6111 last week
+ History
+ 0 contributors
+37 lines (36 sloc)  563 Bytes
+
 ---
 apiVersion: v1
 kind: Pod
 metadata:
-  name: webserver
-  lables:
-    name: webserver
-    type: frontend
-resources:
- request:
-  cpu: "100m"
-  memory: "120Mi"
- Limits:
-  cpu: "100m"
-  memory: "120Mi"
+  name: web
+  labels:
+    name: web
+    tier: frontend
 spec:
-  container:
-  - name: web-server
+  containers:
+  - name: web
+    imagePullPolicy: Always
     image: techworldwithsiva/web:k8
-    imagepullolicy: Always
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "128Mi"
+      limits:
+        cpu: "100m"
+        memory: "128Mi"
     ports:
-    -  containerPort: 80
-
+      - containerPort: 80
 ---
-apiVersion: v1 
+apiVersion: v1
 kind: Service
 metadata:
- name: web-service
+  name: web-service
 spec:
- type: LoadBalancer
- selectors:
-  name: webserver
-  type: frontend
- ports:
-   - protocol: TCP
-     port: 80
-     targetPort: 80
-
+  type: LoadBalancer
+  selector:
+    name: web
+    tier: frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
 

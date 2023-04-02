@@ -16,7 +16,7 @@ resources:
 spec:
   container:
   - name: web-server
-    image: lella1994/web:v1
+    image: techworldwithsiva/web:k8
     imagepullolicy: Always
     ports:
     -  containerPort: 80
